@@ -1,11 +1,13 @@
 package com.elcom.managerlibrary.validation;
 
 import com.elcom.managerlibrary.model.User;
-import io.netty.util.internal.StringUtil;
+import com.elcom.managerlibrary.utils.StringUtil;
+
 
 import javax.validation.ValidationException;
 
 public class UserValidation extends AbstractValidation{
+
     public void validateUpsertUser(User user, String actionType) throws ValidationException {
 
         if (user == null) {

@@ -4,6 +4,7 @@ import com.elcom.managerlibrary.auth.CustomUserDetails;
 import com.elcom.managerlibrary.auth.LoginRequest;
 import com.elcom.managerlibrary.auth.LoginResponse;
 import com.elcom.managerlibrary.auth.jwt.JwtTokenProvider;
+import com.elcom.managerlibrary.exception.ValidationException;
 import com.elcom.managerlibrary.validation.UserValidation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,15 +14,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.ValidationException;
 
 @RestController
+@RequestMapping(value = "/auth/login")
 public class AuthenController {
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthenController.class);
 
@@ -35,7 +33,7 @@ public class AuthenController {
     @Autowired
     AuthenticationManager authenticationManager;
 
-    @RequestMapping(value = "/auth/login", method = RequestMethod.POST)
+    @PostMapping
     public LoginResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         new UserValidation().validateLogin(loginRequest.getUsername(), loginRequest.getPassword());
@@ -51,7 +49,7 @@ public class AuthenController {
             );
         }catch(AuthenticationException ex) {
             LOGGER.error(ex.toString());
-            throw new ValidationException("Sai username/password.");
+            throw new ValidationException("Sai thong tin");
         }
 
         // Set thông tin authentication vào Security Context

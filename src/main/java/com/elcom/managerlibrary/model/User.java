@@ -1,6 +1,6 @@
 package com.elcom.managerlibrary.model;
 
-import jdk.nashorn.internal.runtime.logging.Logger;
+
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
@@ -17,18 +17,18 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private Long id;
+    Long id;
 
     @Column(name = "USERNAME")
-    private String userName;
+    String userName;
 
     @Column(name = "PASSWORD")
-    private String password;
+    String password;
 
     @Column(name = "FULL_NAME")
-    private String fullName;
+    String fullName;
 
     @Column(name = "ROLE_NAME")
-    private String roleName;
+    String roleName;
 
 }
