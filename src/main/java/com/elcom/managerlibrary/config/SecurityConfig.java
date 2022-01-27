@@ -2,7 +2,6 @@ package com.elcom.managerlibrary.config;
 
 import com.elcom.managerlibrary.auth.jwt.JwtAuthenticationFilter;
 import com.elcom.managerlibrary.service.impl.AuthServiceImpl;
-import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     AuthServiceImpl userService;
 

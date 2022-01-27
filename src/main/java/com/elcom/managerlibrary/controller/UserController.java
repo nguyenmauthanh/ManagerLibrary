@@ -38,11 +38,23 @@ public class UserController {
         userService.save(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
-    @DeleteMapping("{theId}")
+    @GetMapping("{theId}")
     public ResponseEntity<User> findUserById(@PathVariable Long theId){
         User user = userService.findById(theId);
         if(user == null){
             throw new NotFoundException(String.format("User has id %d not fount", theId));
+        }
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @DeleteMapping("{theId}")
+    public ResponseEntity<User> deleteUserById(@PathVariable Long theId){
+        User user = userService.findById(theId);
+
+        if(user == null){
+            throw new NotFoundException(String.format("User has id %d not fount", theId));
+        }else {
+            userService.deleteById(theId);
         }
         return new ResponseEntity<>(user, HttpStatus.OK);
     }

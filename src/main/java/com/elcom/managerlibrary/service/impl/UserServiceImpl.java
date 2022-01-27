@@ -1,7 +1,6 @@
 package com.elcom.managerlibrary.service.impl;
 
 import com.elcom.managerlibrary.model.User;
-import com.elcom.managerlibrary.repository.UserCustomizeRepository;
 import com.elcom.managerlibrary.repository.UserRepository;
 import com.elcom.managerlibrary.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +11,12 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final UserCustomizeRepository userCustomizeRepository;
+
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, UserCustomizeRepository userCustomizeRepository) {
+    public UserServiceImpl(UserRepository userRepository  ) {
         this.userRepository = userRepository;
-        this.userCustomizeRepository = userCustomizeRepository;
+
     }
 
     @Override
@@ -27,7 +26,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(Long id) {
-        return userCustomizeRepository.findById(id);
+        return userRepository.findById(id).orElseGet(null);
     }
 
     @Override
@@ -38,5 +37,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void remove(User user) {
         userRepository.delete(user);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
     }
 }

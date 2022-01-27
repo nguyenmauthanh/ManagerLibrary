@@ -25,14 +25,6 @@ public class Author {
     @OneToMany(fetch = FetchType.LAZY,
             mappedBy = "author",
             cascade = CascadeType.ALL)
-    List<Book> booksList=new ArrayList<>();
+    List<Book> booksList;
 
-    public void add(Book tempBook){
-        if (booksList==null){
-            booksList=new ArrayList<>();
-        }
-        booksList.add(tempBook);
-        tempBook.setAuthor(this);
-
-    }
 }

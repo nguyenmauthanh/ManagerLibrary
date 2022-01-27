@@ -2,6 +2,7 @@ package com.elcom.managerlibrary.controller;
 
 import com.elcom.managerlibrary.exception.NotFoundException;
 import com.elcom.managerlibrary.model.Book;
+import com.elcom.managerlibrary.model.User;
 import com.elcom.managerlibrary.service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,13 +39,14 @@ public class BookController {
         return new ResponseEntity<>(book, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{theId}")
+    @DeleteMapping("{theId}")
     public ResponseEntity<Book> deleteById(@PathVariable Long theId){
+        Book book = bookService.findById(theId);
         bookService.deleteById(theId);
-        return new ResponseEntity<>(bookService.findById(theId), HttpStatus.OK);
+        return new ResponseEntity<>(book, HttpStatus.OK);
     }
 
-    @PutMapping("/theId")
+    @PutMapping("{theId}")
     public ResponseEntity<Book> updateBook(@PathVariable Long theId, @RequestBody Book book){
         Book theBook = bookService.findById(theId);
         if(theBook == null){
