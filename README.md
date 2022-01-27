@@ -7,4 +7,4 @@ Công nghệ sử dụng: Spring Framework
                    LomBok,Devtool
                    MySql 
 
-Link postman: https://www.getpostman.com/collections/58480c42cb1e58cd9ad7
+
