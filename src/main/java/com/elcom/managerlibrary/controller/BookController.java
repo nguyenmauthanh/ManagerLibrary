@@ -2,10 +2,8 @@ package com.elcom.managerlibrary.controller;
 
 import com.elcom.managerlibrary.exception.NotFoundException;
 import com.elcom.managerlibrary.model.Book;
-import com.elcom.managerlibrary.model.User;
 import com.elcom.managerlibrary.service.BookService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +16,6 @@ import java.util.List;
 @RequestMapping("api/books")
 public class BookController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(BookController.class);
 
     private final BookService bookService;
 
@@ -52,6 +49,7 @@ public class BookController {
         if(theBook == null){
             throw new NotFoundException(String.format("Book has ID %d not found",theId));
         }
+
         theBook.setBookName(book.getBookName());
         theBook.setAuthor(book.getAuthor());
         theBook.setDescription(book.getDescription());

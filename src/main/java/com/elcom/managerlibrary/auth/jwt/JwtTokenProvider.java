@@ -1,18 +1,24 @@
 package com.elcom.managerlibrary.auth.jwt;
 
 import com.elcom.managerlibrary.auth.CustomUserDetails;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.validation.Valid;
 import java.util.Date;
 
 @Component
 public class JwtTokenProvider {
     private static final Logger LOGGER  = LoggerFactory.getLogger(JwtTokenProvider.class);
-    private final String JWT_SECRET = "elcom@123_2022";
-    private final long JWT_EXPIRATION = 604800000L;
+
+    @Value("${JWT_SECRET}")
+    private String JWT_SECRET;
+
+    @Value("${JWT_EXPIRATION}")
+    private Long JWT_EXPIRATION;
 
     public String generateToken(CustomUserDetails userDetails) {
         // Lấy thông tin user
