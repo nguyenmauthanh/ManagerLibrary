@@ -16,8 +16,7 @@ public class Pub_SubConfig {
     public static class ReceiverConfig{
 
         @Bean
-        public Queue queue1(){
-            return new AnonymousQueue();
+        public Queue queue1() { return new AnonymousQueue();
         }
 
         @Bean

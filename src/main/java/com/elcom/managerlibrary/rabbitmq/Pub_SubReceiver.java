@@ -6,17 +6,17 @@ import org.springframework.util.StopWatch;
 
 public class Pub_SubReceiver {
 
-//    @RabbitListener(queues = "#{queue1.name}")
+    @RabbitListener(queues = "#{queue1.name}")
     public void receiver1(String in) throws InterruptedException {
         receive(in,1);
     }
 
-//    @RabbitListener(queues = "#{queue2.name}")
+    @RabbitListener(queues = "#{queue2.name}")
     public void receiver2(String in) throws InterruptedException {
         receive(in,2);
     }
 
-//    @RabbitListener(queues = "#{queue3.name}")
+    @RabbitListener(queues = "#{queue3.name}")
     public void receiver3(String in) throws InterruptedException {
         receive(in,3);
     }

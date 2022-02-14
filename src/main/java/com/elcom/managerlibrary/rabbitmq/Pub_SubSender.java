@@ -5,7 +5,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
+
 
 public class Pub_SubSender {
 
@@ -21,7 +21,7 @@ public class Pub_SubSender {
     public void send(String message){
         StringBuilder builder = new StringBuilder(message);
 
-        if (dots.getAndIncrement() == 2) {
+        if (dots.getAndIncrement() == 3) {
             dots.set(1);
         }
         for (int i = 0; i < dots.get(); i++) {
@@ -29,7 +29,7 @@ public class Pub_SubSender {
         }
         builder.append(count.incrementAndGet());
         String message_new = builder.toString();
-        rabbitTemplate.convertAndSend(fanoutExchange.getName(), "", message);
-        System.out.println(" [x] Sent '" + message + "'");
+        rabbitTemplate.convertAndSend(fanoutExchange.getName(), "", message_new);
+        System.out.println(" [x] Sent '" + message_new + "' " + fanoutExchange.getName());
     }
 }
