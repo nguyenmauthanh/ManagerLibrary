@@ -171,6 +171,78 @@
 			]
 		},
 		{
+			"name": "Author",
+			"item": [
+				{
+					"name": "GetAuthor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/authors",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostAuthor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":9,\r\n    \"authorName\":\"Hoang Thi Anh\",\r\n    \"description\":\"thich xem phim\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/authors",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAuthor",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/authors/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"authors",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Book",
 			"item": [
 				{
@@ -255,6 +327,97 @@
 								"api",
 								"books",
 								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rabbit",
+			"item": [
+				{
+					"name": "send",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "worker",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/rabbitmq/workerSend?message=Gui tin nhan thanh cong",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rabbitmq",
+								"workerSend"
+							],
+							"query": [
+								{
+									"key": "message",
+									"value": "Gui tin nhan thanh cong"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "publiser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/rabbitmq/publiser?message=Gui tin nhan thanh cong",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rabbitmq",
+								"publiser"
+							],
+							"query": [
+								{
+									"key": "message",
+									"value": "Gui tin nhan thanh cong"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rpc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/rabbitmq/rpc?n=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rabbitmq",
+								"rpc"
+							],
+							"query": [
+								{
+									"key": "n",
+									"value": "2"
+								}
 							]
 						}
 					},
