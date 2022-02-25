@@ -48,6 +48,11 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
+    public Long countAuthor() {
+        return authorRepository.count();
+    }
+
+    @Override
     public Optional<Author> getAuthor(Long authorId) {
         return authorRepository.findById(authorId);
     }
