@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 public class RpcServer {
 
-//    @RabbitListener(queues = "rpc_requests")
+    @RabbitListener(queues = "rpc_requests")
     public int fibonacci(int n) {
         System.out.println(" [-->] Server received request for " + n);
         int result = fib(n);

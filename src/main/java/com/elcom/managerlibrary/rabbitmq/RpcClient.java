@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 public class RpcClient {
 
 
-
     @Autowired
     private RabbitTemplate rpcTemplate;
 
