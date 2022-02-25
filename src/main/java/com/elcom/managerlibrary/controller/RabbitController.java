@@ -29,7 +29,7 @@ public class RabbitController {
     @Autowired
     private Pub_SubSender pub_subSender;
 
-    @Autowired
+//    @Autowired
     private RpcClient rpcClient;
 
     @GetMapping(value = "/send")
@@ -54,4 +54,5 @@ public class RabbitController {
         rpcClient.send(n);
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }
+
 }
