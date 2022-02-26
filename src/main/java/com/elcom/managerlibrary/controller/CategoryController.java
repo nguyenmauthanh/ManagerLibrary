@@ -1,5 +1,6 @@
 package com.elcom.managerlibrary.controller;
 
+import com.elcom.managerlibrary.dto.CategoryDto;
 import com.elcom.managerlibrary.exception.NotFoundException;
 import com.elcom.managerlibrary.model.Category;
 import com.elcom.managerlibrary.service.CategoryService;
@@ -8,9 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -27,22 +28,22 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Category>> getAllCategorys(){
-        List<Category> listCategory = categoryService.findAll();
-        return new ResponseEntity<>(listCategory, HttpStatus.OK);
+    public ResponseEntity<List<CategoryDto>> getAllCategorys() throws NotFoundException{
+        List<CategoryDto> listCategory = categoryService.getAll();
+        return ResponseEntity.ok(listCategory);
     }
 
     @PostMapping
-    public ResponseEntity<Category> addCategory(@RequestBody Category category){
-        categoryService.save(category);
-        return new ResponseEntity<>(category, HttpStatus.OK);
+    public ResponseEntity<CategoryDto> addCategory(@Valid @RequestBody CategoryDto categoryDto) throws Exception{
+        categoryService.save(categoryDto);
+        return new ResponseEntity<>(categoryDto, HttpStatus.OK);
     }
 
-    @GetMapping("{theId}")
-    public ResponseEntity<Category> findCategoryById(@PathVariable Long theId){
-        Category category = categoryService.findById(theId);
+    @GetMapping("{Id}")
+    public ResponseEntity<CategoryDto> findCategoryById(@PathVariable Long Id){
+        CategoryDto category = categoryService.findById(Id);
         if(category == null){
-            throw new NotFoundException(String.format("Category has id %d not found", theId));
+            throw new NotFoundException(String.format("Category has id %d not found", Id));
         }
         else {
             return new ResponseEntity<>(category, HttpStatus.OK);
@@ -50,13 +51,13 @@ public class CategoryController {
     }
 
     @DeleteMapping("{theId}")
-    public ResponseEntity<Category> deleteCategoryById(@PathVariable Long theId){
-        Category category = categoryService.findById(theId);
+    public ResponseEntity<CategoryDto> deleteCategoryById(@PathVariable Long theId){
+        CategoryDto category = categoryService.findById(theId);
         if(category == null){
             throw new NotFoundException(String.format("Category has id %d not found", theId));
         }
         else {
-            categoryService.deleteById(theId);
+            categoryService.delete(theId);
         }
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
