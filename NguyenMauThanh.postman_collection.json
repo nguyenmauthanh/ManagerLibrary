@@ -34,7 +34,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userName\":\"Elcom\",\r\n    \"password\":\"123123a@\",\r\n    \"fullName\":\"Elcomer\",\r\n    \"roleName\":\"ADMIN\"\r\n}",
+							"raw": "{\r\n    \"userName\":\"Elcom1\",\r\n    \"password\":\"123123a@\",\r\n    \"fullName\":\"Elcomer1\",\r\n    \"roleName\":\"ADMIN\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -113,11 +113,21 @@
 				{
 					"name": "Register",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjQ1ODYyOTcwLCJleHAiOjE2NDY0Njc3NzB9.mKKRq4XqzlssAWkDWtUqedDPNRD2fjrqX-w-p4BtTdk",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\":\"Elcom\",\r\n    \"password\":\"123123a@\"\r\n}",
+							"raw": "{\r\n    \"username\":\"Elcom1\",\r\n    \"password\":\"123123a@\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -199,7 +209,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":9,\r\n    \"authorName\":\"Hoang Thi Anh\",\r\n    \"description\":\"thich xem phim\"\r\n}",
+							"raw": "{\r\n    \"id\":1,\r\n    \"authorName\":\"Nguyen Mau Thuc\",\r\n    \"description\":\"Thich da bong, cau long\",\r\n    \"email\":\"nguyenmauthuc21@gmail.com\",\r\n    \"books\":{\r\n        \"id\":1,\r\n        \"bookName\":\"Nghi ngheo lam ngheo\",\r\n        \"description\":\"Day cach lam ngheo\",\r\n        \"bookStatus\":\"FREE\",\r\n        \"category\":{\r\n            \"id\":1,\r\n            \"categoryName\":\"Thanh thieu nien\"\r\n        },\r\n        \"authorId\":1,\r\n        \"categoryId\":1\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -239,6 +249,32 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "GetOneAuthor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/authors/find?name=Nguyen Mau Thuc",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"authors",
+								"find"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Nguyen Mau Thuc"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -268,20 +304,13 @@
 					"name": "PostBook",
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4IiwiaWF0IjoxNjQzMjY3MzIzLCJleHAiOjE2NDM4NzIxMjN9.axBMQejiaFCFfpDusVe1chbPBQKpFj3cS5X-v-5s_yM",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"bookName\":\"Conan\",\r\n    \"description\":\"Ke chuyen ve cuoc song cua tham tu\",\r\n    \"author\":{\r\n        \"authorName\":\"NguyenMauThanh\",\r\n        \"description\":\"Thich choi the thao\",\r\n        \"booksList\":[]\r\n    },\r\n    \"category\":{\r\n        \"categoryName\":\"Chuyen trinh tham\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"id\":1,\r\n    \"bookName\":\"Nghi giau lam giau\",\r\n    \"description\":\"Ke chuyen ve cach kiem tien\",\r\n    \"bookStatus\":\"USED\",\r\n    \"authorId\":1,\r\n    \"author\":{\r\n        \"id\":1,\r\n        \"authorName\":\"Nguyen Mau Thanh\",\r\n        \"description\":\"Thich da bong\",\r\n        \"email\":\"nguyenmauthanh21@gmail.com\"\r\n    },\r\n    \"category\":{\r\n        \"id\":1,\r\n        \"categoryName\":\"20-30 tuoi\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -329,6 +358,14 @@
 								"6"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetOneBook",
+					"request": {
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				}
@@ -403,7 +440,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/rabbitmq/rpc?n=2",
+							"raw": "http://localhost:8080/rabbitmq/rpc?n=3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -416,7 +453,7 @@
 							"query": [
 								{
 									"key": "n",
-									"value": "2"
+									"value": "3"
 								}
 							]
 						}
