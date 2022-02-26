@@ -10,18 +10,24 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "AUTHOR")
+@Table(name = "author")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Author {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     Long id;
-    @Column(name = "AUTHOR_NAME")
+
+    @Column(name = "authorName")
     String authorName;
-    @Column(name = "DESCRIPTION")
+
+    @Column(name = "description")
     String description;
+
+    @Column(name = "email", unique = true)
+    private String email;
+
     @OneToMany(fetch = FetchType.LAZY,
             mappedBy = "author",
             cascade = CascadeType.ALL)

@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    @Query(value = "select b from Book b where b.bookName = ?1", nativeQuery = true)
-    List<Book> findByName(String nameBook);
+    @Query("select a from Book a where a.bookName = :bookName")
+    List<Book> SearchBooksByName(String bookName);
 }

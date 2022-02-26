@@ -8,7 +8,10 @@ import lombok.experimental.FieldDefaults;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "USER"
+    , indexes = {
+        @Index(name = "idx_username", columnList = "userName")
+})
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
 public class User {
@@ -16,19 +19,19 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     Long id;
 
-    @Column(name = "USERNAME")
+    @Column(name = "userName")
     String userName;
 
-    @Column(name = "PASSWORD")
+    @Column(name = "password")
     String password;
 
-    @Column(name = "FULL_NAME")
+    @Column(name = "fullName")
     String fullName;
 
-    @Column(name = "ROLE_NAME")
+    @Column(name = "roleName")
     String roleName;
 
 }

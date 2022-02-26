@@ -1,16 +1,15 @@
 package com.elcom.managerlibrary.controller;
 
+import com.elcom.managerlibrary.dto.AuthorDto;
+import com.elcom.managerlibrary.dto.AuthorUpdateDto;
 import com.elcom.managerlibrary.exception.NotFoundException;
-import com.elcom.managerlibrary.model.Author;
-import com.elcom.managerlibrary.model.Book;
 import com.elcom.managerlibrary.service.AuthorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,53 +21,44 @@ public class AuthorController {
 
     private final AuthorService authorService;
 
-    @Autowired
-    public AuthorController(AuthorService authorService){
+    public AuthorController(AuthorService authorService) {
         this.authorService = authorService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<Author>> getAllAuthors(){
-        List<Author> listAuthor = authorService.findAll();
-        return new ResponseEntity<>(listAuthor, HttpStatus.OK);
+    @GetMapping()
+    public ResponseEntity<List<AuthorDto>> getAll() throws NotFoundException {
+        List<AuthorDto> authorDtos = authorService.getAll();
+        return ResponseEntity.ok(authorDtos);
     }
 
-    @GetMapping("{theId}")
-    public ResponseEntity<Author> findAuthorById(@PathVariable Long theId){
-        Author author = authorService.findById(theId);
-        if (author == null){
-            throw new NotFoundException(String.format("Author has id %d not found", theId));
-        }
-        return new ResponseEntity<>(author, HttpStatus.OK);
+
+    @GetMapping("/find")
+    public ResponseEntity<List<AuthorDto>> findAllByName(@RequestParam String name) throws NotFoundException {
+        List<AuthorDto> authorDtos = authorService.findByAuthorName(name);
+        return ResponseEntity.ok(authorDtos);
     }
 
-    @PostMapping
-    public ResponseEntity<Author> addAuthor(@RequestBody Author author){
-        authorService.save(author);
-        return new ResponseEntity<>(author, HttpStatus.OK);
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AuthorDto> getOneAuthor(@PathVariable(name = "id", required = true) Long id)
+            throws NotFoundException {
+        return ResponseEntity.ok(authorService.getOne(id));
     }
 
-    @DeleteMapping("{theId}")
-    public ResponseEntity<Author> deleteAuthorById(@PathVariable Long theId){
-        Author author = authorService.findById(theId);
-        if (author == null){
-            throw new NotFoundException(String.format("Author has id %d not found", theId));
-        }
-        else {
-            authorService.deleteById(theId);
-        }
-        return new ResponseEntity<>(author, HttpStatus.OK);
+    @PostMapping()
+    public ResponseEntity<AuthorDto> createAuthor(@Valid @RequestBody AuthorDto authorDto) {
+        return ResponseEntity.ok(authorService.save(authorDto));
     }
 
-    @PutMapping("/theId")
-    public ResponseEntity<Author> updateBook(@PathVariable Long theId, @RequestBody Author author){
-        Author theAuthor = authorService.findById(theId);
-        if(theAuthor == null){
-            throw new NotFoundException(String.format("Book has ID %d not found",theId));
-        }
-        theAuthor.setAuthorName(author.getAuthorName());
-        theAuthor.setDescription(author.getAuthorName());
-        theAuthor.setBooksList(author.getBooksList());
-        return new ResponseEntity<>(theAuthor, HttpStatus.OK);
+    @PutMapping("/{id}")
+    public ResponseEntity<AuthorUpdateDto> updateAuthor(@PathVariable(name = "id", required = true) Long id,
+                                                        @Valid @RequestBody AuthorUpdateDto authorUpdateDto) throws NotFoundException {
+        return ResponseEntity.ok(authorService.update(id, authorUpdateDto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteBook(@PathVariable(name = "id", required = true) Long id)
+            throws NotFoundException {
+        return ResponseEntity.ok(authorService.delete(id));
     }
 }

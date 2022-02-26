@@ -36,7 +36,7 @@ public class Scheduler {
         SimpleMailMessage msg = new SimpleMailMessage(this.simpleMailMessage);
         msg.setTo("nguyenmauthanh21@gmail.com");
         msg.setSubject("THONG TIN VE TAC GIA CUA THU VIEN");
-        msg.setText("SO LUONG TAC GIA TRONG THOI GIAN HIEN TAI " + authorService.countAuthor());
+        msg.setText("SO LUONG TAC GIA TRONG THOI GIAN HIEN TAI ");
 
         try {
             this.mailSender.send(msg);

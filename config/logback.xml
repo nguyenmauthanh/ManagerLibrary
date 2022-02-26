@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <appender name="ROLLIN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/library.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+
+            <!-- daily rollover -->
+            <fileNamePattern>library.log.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+        </rollingPolicy>
+
+        <encoder>
+            <!-- <pattern>%d %p %C{1.} [%t] %m%n</pattern> -->
+            <pattern>
+                %d{dd-MM-yyyy HH:mm:ss.SSS} %-5level %logger{36}.%M - %msg%n
+            </pattern>
+        </encoder>
+
+    </appender>
+
+    <!-- trace - debug - info - warn - error - fatal -->
+    <root level="INFO">
+        <appender-ref ref="ROLLIN" />
+    </root>
+
+    <logger name="root" level="ERROR"/>
+    <logger name="org.springframework" level="ERROR"/>
+    <logger name="com.example.managerlibrary" level="INFO"/>
+</configuration>

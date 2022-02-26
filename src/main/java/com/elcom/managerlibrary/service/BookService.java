@@ -1,17 +1,17 @@
 package com.elcom.managerlibrary.service;
 
+import com.elcom.managerlibrary.dto.BookDto;
+import com.elcom.managerlibrary.dto.BookUpdateDto;
+import com.elcom.managerlibrary.exception.NotFoundException;
 import com.elcom.managerlibrary.model.Book;
 
 import java.util.List;
 
 public interface BookService {
-    List<Book> findAll();
-
-    Book findById(Long theId);
-
-    void save(Book theBook);
-
-    void deleteById(Long theId);
-
-    List<Book> findBookByName(String nameBook);
+    public BookDto save(BookDto bookDto) throws Exception;
+    public List<BookDto> getAll() throws NotFoundException;
+    public BookUpdateDto update(Long id, BookUpdateDto bookUpdateDto) throws NotFoundException;
+    public BookDto getOne(Long id) throws NotFoundException ;
+    public Boolean delete(Long id) throws NotFoundException;
+    public List<BookDto> SearchBooksByName(String name) throws NotFoundException;
 }
