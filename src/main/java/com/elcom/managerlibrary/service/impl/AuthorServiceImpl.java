@@ -97,4 +97,9 @@ public class AuthorServiceImpl implements AuthorService {
         return true;
 
     }
+
+    @Override
+    public Long count() {
+        return authorRepository.count();
+    }
 }

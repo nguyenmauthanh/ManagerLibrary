@@ -11,6 +11,9 @@ import com.elcom.managerlibrary.repository.BookRepository;
 import com.elcom.managerlibrary.service.BookService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,6 +59,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Cacheable(value = "books")
     public List<BookDto> getAll() throws NotFoundException {
         List<Book> books = bookRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
         if (books.size() < 1) {
@@ -70,6 +74,7 @@ public class BookServiceImpl implements BookService {
 
     @Transactional
     @Override
+    @CachePut(value = "books", key = "#id")
     public BookUpdateDto update(Long id, BookUpdateDto bookUpdateDto) throws NotFoundException {
         Optional<Book> bookOpt = bookRepository.findById(id);
         if (!bookOpt.isPresent()) {
@@ -90,6 +95,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Cacheable(value = "books", key = "#id")
     public BookDto getOne(Long id) throws NotFoundException {
         Optional<Book> book = bookRepository.findById(id);
         if (!book.isPresent()) {
@@ -103,6 +109,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @CacheEvict(value = "books", key = "#id")
     public Boolean delete(Long id) throws NotFoundException {
         Optional<Book> book = bookRepository.findById(id);
         if (!book.isPresent()) {
@@ -120,5 +127,10 @@ public class BookServiceImpl implements BookService {
         }
         BookDto[] bookDtos = modelMapper.map(books, BookDto[].class);
         return Arrays.asList(bookDtos);
+    }
+
+    @Override
+    public Long count() {
+        return bookRepository.count();
     }
 }

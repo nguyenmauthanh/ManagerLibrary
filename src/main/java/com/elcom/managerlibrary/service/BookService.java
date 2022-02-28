@@ -14,4 +14,6 @@ public interface BookService {
     public BookDto getOne(Long id) throws NotFoundException ;
     public Boolean delete(Long id) throws NotFoundException;
     public List<BookDto> SearchBooksByName(String name) throws NotFoundException;
+
+    public Long count();
 }

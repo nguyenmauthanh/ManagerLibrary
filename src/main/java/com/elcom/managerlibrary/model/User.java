@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "USER"
@@ -14,7 +15,7 @@ import javax.persistence.*;
 })
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
-public class User {
+public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

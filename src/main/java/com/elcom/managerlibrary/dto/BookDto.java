@@ -4,9 +4,10 @@ import com.elcom.managerlibrary.model.BookStatus;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Data
-public class BookDto {
+public class BookDto implements Serializable {
     private Long id;
 
     @NotNull

@@ -3,10 +3,11 @@ package com.elcom.managerlibrary.dto;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class AuthorDto {
+public class AuthorDto implements Serializable {
 
     private Long id;
 

@@ -1,6 +1,7 @@
 package com.elcom.managerlibrary.scheduler;
 
 import com.elcom.managerlibrary.service.AuthorService;
+import com.elcom.managerlibrary.service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class Scheduler {
     private AuthorService authorService;
 
     @Autowired
+    private BookService bookService;
+
+    @Autowired
     private MailSender mailSender;
 
     private SimpleMailMessage simpleMailMessage;
@@ -35,8 +39,10 @@ public class Scheduler {
 
         SimpleMailMessage msg = new SimpleMailMessage(this.simpleMailMessage);
         msg.setTo("nguyenmauthanh21@gmail.com");
-        msg.setSubject("THONG TIN VE TAC GIA CUA THU VIEN");
-        msg.setText("SO LUONG TAC GIA TRONG THOI GIAN HIEN TAI ");
+        msg.setSubject("THONG TIN VE TAC GIA VA SACH CUA THU VIEN");
+        msg.setText("SO LUONG TAC GIA TRONG THOI GIAN HIEN TAI " + authorService.count() + "\n" +
+                "SO LUONG SACH CUA THU VIEN LA " + bookService.count());
+
 
         try {
             this.mailSender.send(msg);

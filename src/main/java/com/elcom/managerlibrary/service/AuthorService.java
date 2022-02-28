@@ -17,4 +17,5 @@ public interface AuthorService {
     public AuthorUpdateDto update(Long id, @Valid AuthorUpdateDto authorUpdateDto) throws NotFoundException;
     public AuthorDto getOne(Long id) throws NotFoundException;
     public Boolean delete(Long id) throws NotFoundException ;
+    public Long count();
 }
